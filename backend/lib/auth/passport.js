@@ -1,6 +1,7 @@
 const Custom = require("passport-custom");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const { sendConfirmationEmail } = require("../mail/mailer");
 const jwtStrategy = require("passport-jwt").Strategy;
 const extractJwt = require("passport-jwt").ExtractJwt;
 const { PrismaClient } = require("@prisma/client");
@@ -35,6 +36,10 @@ const RegistrationStrategy = new Custom.Strategy(async (req, done) => {
           },
         },
       },
+    });
+    await sendConfirmationEmail({
+      toUser: user.email,
+      code: token,
     });
     done(null, user);
   } catch (err) {
