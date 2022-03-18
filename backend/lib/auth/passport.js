@@ -47,4 +47,43 @@ const RegistrationStrategy = new Custom.Strategy(async (req, done) => {
   }
 });
 
-module.exports = { RegistrationStrategy };
+const LoginStrategy = new Custom.Strategy(async (req, done) => {
+  try {
+    let { email, password } = req.body;
+    let user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+      include: { role: true },
+    });
+    if (!user) {
+      return done(new Error("Invalid email"));
+    }
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err) {
+        return done(err);
+      }
+      if (result) {
+        return done(null, user);
+      }
+      done(new Error(t("Invalid password")));
+    });
+  } catch (err) {
+    done(err);
+  }
+});
+
+const JwtStrategy = new jwtStrategy(
+  {
+    secretOrKey: process.env.JWT_SECRET,
+    jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
+  },
+  async (token, done) => {
+    try {
+      return done(null, token.user);
+    } catch (err) {
+      done(err);
+    }
+  }
+);
+module.exports = { RegistrationStrategy, LoginStrategy };
