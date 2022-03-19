@@ -66,7 +66,7 @@ const LoginStrategy = new Custom.Strategy(async (req, done) => {
       if (result) {
         return done(null, user);
       }
-      done(new Error(t("Invalid password")));
+      done(new Error("Invalid password"));
     });
   } catch (err) {
     done(err);
@@ -86,4 +86,4 @@ const JwtStrategy = new jwtStrategy(
     }
   }
 );
-module.exports = { RegistrationStrategy, LoginStrategy };
+module.exports = { RegistrationStrategy, LoginStrategy, JwtStrategy };
