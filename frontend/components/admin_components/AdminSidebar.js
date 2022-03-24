@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import LogoutButton from "../LogoutButton";
-import Users from "./Users";
+import Users from "./Parts";
 
 const Adminsidebar = (props) => {
   return (

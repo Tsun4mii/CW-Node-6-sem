@@ -32,3 +32,11 @@ model Role{
   roleName String
   users User[]
 }
+
+model Part{
+  id Int @id @default(autoincrement())
+  name String
+  price Float
+  in_stock Int
+  img_path String?
+}

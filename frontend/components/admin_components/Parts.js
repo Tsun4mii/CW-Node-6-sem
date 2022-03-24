@@ -1,15 +1,15 @@
 import React from "react";
 import Link from "next/link";
-const Users = () => {
+const Parts = () => {
   return (
     <>
       <li className="nav-item">
-        <Link href="/admin">
-          <a className="nav-link activate text-light">Users</a>
+        <Link href="/admin/parts">
+          <a className="nav-link activate text-light">Parts</a>
         </Link>
       </li>
     </>
   );
 };
 
-export default Users;
+export default Parts;
