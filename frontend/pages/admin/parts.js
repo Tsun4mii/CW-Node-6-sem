@@ -77,7 +77,7 @@ const Parts = ({ data }) => {
       <div className="d-flex justify-content-center">
         <Partstable columns={columns} data={data.parts} />
       </div>
-      <Link href="/admin/points/add" passHref>
+      <Link href="/admin/parts/add" passHref>
         <button className="btn">Add part</button>
       </Link>
       <Modalwindow show={showState} toggleModal={closeModal} id={deleteId} />
