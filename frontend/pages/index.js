@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import DefaultLayout from "../components/layouts/DefaultLayout";
-import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 

@@ -23,18 +23,25 @@ const Edit = ({ data }) => {
 
   const submit = async (e) => {
     e.preventDefault();
+    let formData = new FormData();
     console.log(data.part.id + " " + updateName + " " + updatePrice);
     const id = data.part.id;
+    formData.append("id", id);
+    formData.append("updateName", updateName);
+    formData.append("updatePrice", updatePrice);
+    let imagedata = document.querySelector('input[type="file"]').files[0];
+    formData.append("file", imagedata);
     const request = await fetch(
       `${process.env.NEXT_PUBLIC_BACK_DOMAIN}/v1/entities/parts/edit`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        //headers: { "Content-Type": "application/json" },
+        /*body: JSON.stringify({
           id,
           updateName,
           updatePrice,
-        }),
+        }),*/
+        body: formData,
       }
     );
     const content = await request.json();
@@ -46,7 +53,7 @@ const Edit = ({ data }) => {
   return (
     <Adminsidebar>
       <div className="d-flex justify-content-center">
-        <form onSubmit={submit}>
+        <form onSubmit={submit} encType={"multipart/form-data"}>
           <h1>Part update</h1>
           <label htmlFor="name">Name</label>
           <input
@@ -64,9 +71,21 @@ const Edit = ({ data }) => {
             required
             onChange={(e) => setUpdatePrice(e.target.value)}
           />
-          <button type="submit" className="btn btn-info">
-            update
-          </button>
+          <div className="d-block">
+            <input type="file" name="file" />
+          </div>
+          <div className="d-inline">
+            <img
+              src={`http://localhost:5000/${data.part.img_path}`}
+              width={100}
+              height={200}
+            />
+          </div>
+          <div className="d-inline">
+            <button type="submit" className="btn btn-info">
+              update
+            </button>
+          </div>
         </form>
       </div>
     </Adminsidebar>

@@ -1,7 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const multer = require("multer");
-const upload = multer({ dest: "../../../public/img" }).single("part_img");
 
 module.exports = {
   async addPart(req, res) {
@@ -44,11 +42,13 @@ module.exports = {
   async edit(req, res) {
     try {
       let { updateName, id, updatePrice } = req.body;
+      console.log(req.body);
       const update = await prisma.part.update({
         where: { id: Number.parseInt(id) },
         data: {
           name: updateName,
           price: Number.parseFloat(updatePrice),
+          img_path: req.file.filename,
         },
       });
       res.status(200).json({ update });

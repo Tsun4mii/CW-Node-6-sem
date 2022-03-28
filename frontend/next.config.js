@@ -6,6 +6,10 @@ const nextConfig = {
       source: "/v1/:path*",
       destination: "http://localhost:5000/api/:path*",
     },
+    {
+      source: "/v1/static/:path*",
+      destination: "http://localhost:5000/:path*",
+    },
   ],
 };
 

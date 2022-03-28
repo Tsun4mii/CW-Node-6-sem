@@ -1,7 +1,7 @@
 const activationController = require("../controllers/user/activationController");
 
 module.exports = (app) => {
-  app.post(
+  app.get(
     "/api/activate/user/:token",
     activationController.activateRegistration
   );
