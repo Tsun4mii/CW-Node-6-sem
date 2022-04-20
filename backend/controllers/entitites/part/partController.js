@@ -31,7 +31,7 @@ module.exports = {
       let { id } = req.body;
       const part = await prisma.part.findFirst({
         where: {
-          id: id,
+          id: Number.parseInt(id),
         },
       });
       res.status(200).json({ part });
@@ -42,16 +42,28 @@ module.exports = {
   async edit(req, res) {
     try {
       let { updateName, id, updatePrice } = req.body;
-      console.log(req.body);
       const update = await prisma.part.update({
         where: { id: Number.parseInt(id) },
         data: {
           name: updateName,
           price: Number.parseFloat(updatePrice),
-          img_path: req.file.filename,
+          img_path: "http://localhost:5000/" + req.file.filename,
         },
       });
       res.status(200).json({ update });
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ error: err.message });
+    }
+  },
+  async getPagination(req, res) {
+    try {
+      let { offset, take } = req.body;
+      const result = await prisma.part.findMany({
+        skip: Number.parseInt(offset),
+        take: Number.parseInt(take),
+      });
+      res.status(200).json({ result });
     } catch (err) {
       console.log(err);
       res.status(400).json({ error: err.message });

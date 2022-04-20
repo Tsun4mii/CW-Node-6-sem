@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import LogoutButton from "../LogoutButton";
 import Users from "./Parts";
+import Marks from "./Marks/Marks";
 
 const Adminsidebar = (props) => {
   return (
@@ -10,6 +11,7 @@ const Adminsidebar = (props) => {
         <div>
           <ul>
             <Users />
+            <Marks />
           </ul>
           <div className="d-flex justify-content-center">
             <LogoutButton />

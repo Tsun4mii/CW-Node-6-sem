@@ -1,12 +1,14 @@
 import React from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-const Modalwindow = ({ show, toggleModal, id }) => {
+const Modalwindow = ({ show, toggleModal, id, affectedEntity }) => {
   const deleteHandle = async (id) => {
+    console.log(affectedEntity);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_DOMAIN}/api/entities/point/delete`,
+      `http://localhost:3000/v1/entities/${affectedEntity}/delete`,
       {
-        method: "POST",
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: id,
         }),
@@ -18,8 +20,8 @@ const Modalwindow = ({ show, toggleModal, id }) => {
   return (
     <>
       <Modal isOpen={show}>
-        <ModalHeader>Delete part</ModalHeader>
-        <ModalBody>Are you sure you want to delete this part?</ModalBody>
+        <ModalHeader>Delete item</ModalHeader>
+        <ModalBody>Are you sure you want to delete this item?</ModalBody>
         <ModalFooter>
           <button className="btn btn-danger" onClick={toggleModal}>
             Cancel

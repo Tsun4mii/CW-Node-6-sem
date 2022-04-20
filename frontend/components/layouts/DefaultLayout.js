@@ -10,7 +10,7 @@ const DefaultLayout = (props) => {
         <title>Local Travel</title>
       </Head>
 
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <nav className="navbar navbar-expand-md navbar-dark mb-4 bgprime">
         <div className="container-fluid">
           <Link href="/">
             <a className="navbar-brand">Home</a>

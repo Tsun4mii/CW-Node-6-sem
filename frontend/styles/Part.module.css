@@ -1,0 +1,25 @@
+.product {
+  border: 1px;
+  border-style: solid;
+  border-color: #151d3b7e;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.product_button {
+  border: #d82148 solid 1px;
+  border-radius: 5px;
+  background: white;
+  margin: 5px;
+  color: #d82148;
+}
+
+.product_button:hover {
+  color: white;
+  background: #d82148;
+}
+
+.link_more {
+  color: #d82148;
+}

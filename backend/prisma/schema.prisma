@@ -15,6 +15,7 @@ model User{
   roleId Int?
   role Role? @relation(fields: [roleId], references: [id])
   ActivationCodes ActivationCode[]
+  Comments Comment[]
 }
 
 model ActivationCode{
@@ -39,4 +40,36 @@ model Part{
   price Float
   in_stock Int
   img_path String?
+  categoryId Int?
+  category Category? @relation(fields: [categoryId], references: [id])
+  comments Comment[]
+}
+
+model Comment{
+  id Int @id @default(autoincrement())
+  body String
+  partId Int
+  part Part @relation(fields: [partId], references: [id])
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Category{
+  id Int @id @default(autoincrement())
+  categoryName String
+  parts Part[]
+}
+
+model CarMark{
+  id Int @id @default(autoincrement())
+  model CarModel[]
+  carMarkName String
+}
+
+model CarModel{
+  id Int @id @default(autoincrement())
+  carModelName String
+  markId Int? 
+  mark CarMark? @relation(fields: [markId], references: [id])
+
 }

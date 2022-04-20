@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Adminsidebar from "../../../../components/admin_components/AdminSidebar";
 
 export const getServerSideProps = async (context) => {
+  console.log(context.query.id);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACK_DOMAIN}/v1/entities/parts/getById`,
     {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: context.query.id,
       }),
@@ -75,11 +77,7 @@ const Edit = ({ data }) => {
             <input type="file" name="file" />
           </div>
           <div className="d-inline">
-            <img
-              src={`http://localhost:5000/${data.part.img_path}`}
-              width={100}
-              height={200}
-            />
+            <img src={data.part.img_path} width={100} height={200} />
           </div>
           <div className="d-inline">
             <button type="submit" className="btn btn-info">
