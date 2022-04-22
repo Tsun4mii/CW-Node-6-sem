@@ -17,12 +17,11 @@ export const getServerSideProps = async (context) => {
     `${process.env.NEXT_PUBLIC_BACK_DOMAIN}/v1/part/comment/${context.query.id}`,
     {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
     }
   );
   const content = await response.json();
   const commentsJson = await comments.json();
-  console.log(commentsJson);
+
   return {
     props: { data: content, comments: commentsJson },
   };
@@ -34,7 +33,10 @@ const Id = ({ data, comments }) => {
       <img src={data.part.img_path} alt="" width={200} height={200} />
       <div className="d-flex">
         {comments.comments.map((obj, i) => (
-          <p key={i}>{obj.body}</p>
+          <>
+            <p key={i}>{obj.user.email} : </p>
+            <p key={i}>{" " + obj.body}</p>
+          </>
         ))}
       </div>
     </DefaultLayout>

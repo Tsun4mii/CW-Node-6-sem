@@ -1,5 +1,6 @@
 const partController = require("../controllers/entitites/part/partController");
 const markController = require("../controllers/entitites/mark/markController");
+const modelController = require("../controllers/entitites/model/modelController");
 const multer = require("multer");
 var storage = multer.diskStorage({
   destination: (req, file, cd) => {
@@ -20,9 +21,17 @@ module.exports = (app) => {
     partController.edit
   );
   app.post("/api/entities/parts/getPag", partController.getPagination);
+  //--------------------------------------------------------------//
   app.get("/api/entities/marks", markController.getMarks);
   app.post("/api/entities/marks/add", markController.addMark);
   app.get("/api/entities/marks/:id", markController.getById);
   app.put("/api/entities/marks/edit", markController.edit);
   app.delete("/api/entities/marks/delete", markController.delete);
+  //--------------------------------------------------------------//
+  app.get("/api/entities/models", modelController.getModels);
+  app.post("/api/entities/models/add", modelController.addModel);
+  app.get("/api/entities/models/:id", modelController.getById);
+  app.put("/api/entities/models/edit", modelController.edit);
+  app.delete("/api/entities/models/delete", modelController.delete);
+  //--------------------------------------------------------------//
 };

@@ -24,6 +24,13 @@ module.exports = {
         where: {
           partId: Number.parseInt(partId),
         },
+        include: {
+          user: {
+            select: {
+              email: true,
+            },
+          },
+        },
       });
       res.status(200).json({ comments });
     } catch (err) {
