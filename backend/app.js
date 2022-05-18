@@ -8,6 +8,7 @@ const commentRouter = require("./routes/commentsRoutes");
 const routesMain = require("./routes/routesMain");
 const swaggerUi = require("swagger-ui-express");
 const swaggetJSDoc = require("swagger-jsdoc");
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(passport.initialize());
 app.use(
   express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 })
 );
+app.use(cookieParser());
 // TODO:Move all routes imports to routesMain.js
 routesMain(app);
 authRoutes(app);

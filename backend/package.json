@@ -13,6 +13,7 @@
   "dependencies": {
     "@prisma/client": "^3.10.0",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
@@ -24,6 +25,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "prisma": "^3.10.0",
+    "stripe": "^8.222.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.3.0"
   }

@@ -16,6 +16,7 @@ model User{
   role Role? @relation(fields: [roleId], references: [id])
   ActivationCodes ActivationCode[]
   Comments Comment[]
+  Orders Order[]
 }
 
 model ActivationCode{
@@ -42,7 +43,12 @@ model Part{
   img_path String?
   categoryId Int?
   category Category? @relation(fields: [categoryId], references: [id])
+  carMarkId Int? 
+  carMark CarMark? @relation(fields: [carMarkId], references: [id])
+  carModelId Int?
+  carModel CarModel? @relation(fields: [carModelId], references: [id])
   comments Comment[]
+  buckets Bucket[]
 }
 
 model Comment{
@@ -64,6 +70,7 @@ model CarMark{
   id Int @id @default(autoincrement())
   model CarModel[]
   carMarkName String
+  parts Part[]
 }
 
 model CarModel{
@@ -71,5 +78,24 @@ model CarModel{
   carModelName String
   markId Int? 
   mark CarMark? @relation(fields: [markId], references: [id])
+  parts Part[]
+}
 
+model Order{
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  totalCost Float
+  status String @default("In process")
+  date DateTime? 
+  buckets Bucket[]
+}
+
+model Bucket{
+  id Int @id @default(autoincrement())
+  orderId Int
+  order Order @relation(fields: [orderId], references: [id])
+  partId Int?
+  part Part? @relation(fields: [partId], references: [id])
+  quantity Int? 
 }

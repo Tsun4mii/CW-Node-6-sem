@@ -6,6 +6,14 @@ const LogoutButton = () => {
 
   const logout = async () => {
     localStorage.removeItem("token");
+    console.log("here");
+    const logout = await fetch(
+      `${process.env.NEXT_PUBLIC_BACK_DOMAIN}/v1/logout`,
+      {
+        method: "POST",
+      }
+    );
+    const data = await logout.json();
     await router.push("/signin");
   };
 

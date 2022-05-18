@@ -2,6 +2,7 @@
   border: 1px;
   border-style: solid;
   border-color: #151d3b7e;
+  backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 10px;
   margin: 5px;
@@ -22,4 +23,30 @@
 
 .link_more {
   color: #d82148;
+}
+
+.product p {
+  margin-bottom: auto;
+}
+
+.b_content {
+  margin-left: 170px;
+  margin-right: 170px;
+}
+
+.comment {
+  border: 1px;
+  border-style: solid;
+  border-color: #151d3b7e;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.comment p {
+  margin-bottom: 2px;
+}
+
+.part_img_div {
+  margin-right: 100px;
 }

@@ -34,5 +34,4 @@ const Modalwindow = ({ show, toggleModal, id, affectedEntity }) => {
     </>
   );
 };
-
 export default Modalwindow;

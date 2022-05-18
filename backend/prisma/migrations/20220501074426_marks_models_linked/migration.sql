@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE `part` ADD COLUMN `carMarkId` INTEGER NULL,
+    ADD COLUMN `carModelId` INTEGER NULL;
+
+-- AddForeignKey
+ALTER TABLE `Part` ADD CONSTRAINT `Part_carMarkId_fkey` FOREIGN KEY (`carMarkId`) REFERENCES `CarMark`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Part` ADD CONSTRAINT `Part_carModelId_fkey` FOREIGN KEY (`carModelId`) REFERENCES `CarModel`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

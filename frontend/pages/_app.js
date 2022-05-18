@@ -6,3 +6,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+//это комменты для юры, пока он чинит

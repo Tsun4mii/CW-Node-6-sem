@@ -35,6 +35,8 @@ module.exports = {
       const user = await authenticate("custom", req, res);
       const body = { id: user.id, email: user.email, role: user.role.key };
       const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
+      res.cookie("userId", body.id);
+      res.cookie("token", token);
       res.status(200).json({ token });
     } catch (err) {
       res.status(404).json({ error: err.message });
@@ -54,5 +56,9 @@ module.exports = {
     let { password, email } = req.body;
     console.log(password + " " + email);
     res.status(200).send({ test: "ok" });
+  },
+  async logOut(req, res) {
+    res.clearCookie("token");
+    res.status(200).json({ status: "logged out" });
   },
 };

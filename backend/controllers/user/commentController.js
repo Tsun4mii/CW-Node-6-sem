@@ -4,7 +4,8 @@ const prisma = new PrismaClient();
 module.exports = {
   async postComment(req, res) {
     try {
-      let { partId, userId, body } = req.body;
+      let { partId, body } = req.body;
+      let userId = req.cookies.userId;
       const result = await prisma.comment.create({
         data: {
           partId: Number.parseInt(partId),

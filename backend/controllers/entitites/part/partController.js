@@ -33,6 +33,23 @@ module.exports = {
         where: {
           id: Number.parseInt(id),
         },
+        include: {
+          carMark: {
+            select: {
+              carMarkName: true,
+            },
+          },
+          carModel: {
+            select: {
+              carModelName: true,
+            },
+          },
+          category: {
+            select: {
+              categoryName: true,
+            },
+          },
+        },
       });
       res.status(200).json({ part });
     } catch (err) {
@@ -42,14 +59,29 @@ module.exports = {
   async edit(req, res) {
     try {
       let { updateName, id, updatePrice } = req.body;
-      const update = await prisma.part.update({
-        where: { id: Number.parseInt(id) },
-        data: {
-          name: updateName,
-          price: Number.parseFloat(updatePrice),
-          img_path: "http://localhost:5000/" + req.file.filename,
-        },
-      });
+      let update;
+      if (req.file) {
+        let fileName = req.file.filename;
+      }
+      if (req.file) {
+        console.log("here");
+        update = await prisma.part.update({
+          where: { id: Number.parseInt(id) },
+          data: {
+            name: updateName,
+            price: Number.parseFloat(updatePrice),
+            img_path: "http://localhost:5000/" + fileName,
+          },
+        });
+      } else {
+        update = await prisma.part.update({
+          where: { id: Number.parseInt(id) },
+          data: {
+            name: updateName,
+            price: Number.parseFloat(updatePrice),
+          },
+        });
+      }
       res.status(200).json({ update });
     } catch (err) {
       console.log(err);
